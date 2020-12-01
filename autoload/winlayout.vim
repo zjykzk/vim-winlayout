@@ -10,7 +10,7 @@ let s:is_restoring_layout = v:false
 
 func! winlayout#inspect_layout() abort
 	let @* = json_encode(s:layouts)
-	echom @*
+	echom @* ', current index:' s:winlayout_index
 endfunc
 func! winlayout#inspect_restcmd() abort
 	let @* = json_encode(s:resize_cmds)
@@ -78,11 +78,9 @@ func! winlayout#restore(direction) abort
 		let s:winlayout_index += a:direction
 		if s:winlayout_index < 0 
 			let s:winlayout_index = 0
-			return
 		endif
 		if s:winlayout_index >= len(s:layouts)
 			let s:winlayout_index = len(s:layouts) - 1
-			return
 		endif
 
 		
